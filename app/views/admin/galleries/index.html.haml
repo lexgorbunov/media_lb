@@ -1,0 +1,14 @@
+.list-toolbar
+  %h3.header Коллекции
+  .btn-group
+    = link_to [:new, :admin, :gallery], class: 'btn btn-success' do
+      %i.glyphicon.glyphicon-plus
+      Добавить новую
+
+= render partial: 'admin/shared/flash'
+
+.entries-list
+  - @entries.each do |gallery|
+    .list-item
+      = link_to gallery.title, [:edit, :admin, gallery]
+      %input.form-control{type: :text, value: polymorphic_url(gallery)}

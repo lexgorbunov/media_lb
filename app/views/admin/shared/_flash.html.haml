@@ -1,0 +1,4 @@
+- if flash.present?
+  - flash.each do |msg_type, message|
+    .alert{class: "alert-#{(msg_type =~ /^error[s]?$/ ? 'danger' : 'info')}"}= message
+  - flash.clear

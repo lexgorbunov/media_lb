@@ -1,0 +1,40 @@
+ru:
+  shared_attributes: &shared_attributes
+    shared: &shared
+      id:                         '#'
+      title:                      Название
+      is_published:               Опубликовано
+      updated_at:                 Дата изменения
+      created_at:                 Дата создания
+    gallery:
+      <<: *shared
+      image:                      Картинка
+      gallery_photos:             Галерея
+    photo:
+      link:                       Ссылка
+    photo:
+      image:                      Картинка
+  helpers:
+    label:
+      <<: *shared_attributes
+  activerecord:
+    attributes:
+      <<: *shared_attributes
+    errors:
+      models:
+        gallery:
+          attributes:
+            title:
+              blank:                не может быть пустым
+            content:
+              blank:                не может быть пустым
+        photo:
+          attributes:
+            image:
+              blank:                обязательно должна быть загружена
+    models:
+      gallery:
+        one:        коллекция
+        few:        коллекции
+        many:       коллекций
+        other:      коллекции

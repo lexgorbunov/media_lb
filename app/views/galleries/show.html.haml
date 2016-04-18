@@ -1,0 +1,13 @@
+.list-toolbar
+  %h3.header
+    = Gallery.model_name.human
+    = @entry.title
+
+.photos-collection
+  - @entry.photos.each do |photo|
+    .photo-container
+      - if photo.image.present?
+        %a.image{href: photo.image.file.url, target: '_blank'}
+          %img{src: photo.image.file.url(:_80x80)}
+      - if photo.link.present?
+        %a.link{href: photo.link, target: '_blank'}= photo.link

@@ -1,0 +1,54 @@
+.list-toolbar
+  %h3.header= t(@entry.persisted? ? 'gallery_editing' : 'gallery_creating')
+
+- if @entry.errors.present?
+  .alert.alert-danger
+    - @entry.errors.full_messages.each do |msg|
+      %p.bg-danger= msg
+
+= render partial: 'admin/shared/flash'
+
+= form_for [:admin, @entry], html: {id: 'gallery-form', multipart: true} do |f|
+  .form-group
+    = f.label :title
+    = f.text_field :title, class: 'form-control'
+
+  .checkbox
+    %label
+      = f.check_box :is_published
+      = @entry.class.human_attribute_name :is_published
+
+  .photos-list
+    %h4= t('photo_collection_content')
+    %input{type: :file, class: 'hidden'}
+    - if @entry.persisted?
+      .js-gallery-images-list
+        = f.fields_for :photos, f.object.photos do |photo|
+          .is-photo-item.form-group
+            = photo.hidden_field :_destroy, value: 0
+
+            = photo.fields_for :image do |image|
+              .form-group.flex-bar.top.rare
+                %div
+                  %div= t('uploaded_file')
+                  %div= image.object.file_file_name
+                %div
+                  %img{src: image.object.url(:_80x80)}
+
+              .form-group.file-input-placeholder
+                .item-title= t('upload_new')
+                = image.file_field :file
+                .btn.btn-danger.js-btn-remove-image
+                  %i.glyphicon.glyphicon-trash
+              .form-group
+                = photo.url_field :link, class: 'form-control', placeholder: photo.object.class.human_attribute_name(:link)
+      .form-group
+        %div.btn.btn-success.js-btn-add-image
+          = t('add_image')
+    - else
+      = t('msg.save_to_attach_photos')
+
+  .form-group.text-right
+    - if @entry.persisted?
+      = link_to t('delete_gallery'), [:admin, @entry], class: 'btn btn-danger', data: {method: :delete, confirm: t('msg.are_you_sure')}
+    %button{type: :submit, class: 'btn btn-primary'}= t('save')
