@@ -4,7 +4,7 @@ class Admin::GalleriesController < Admin::AdminController
   permit gallery: Gallery::PARAMS
 
   def index
-    @entries = Gallery.all
+    @entries = Gallery.paginate(page: params.fetch(:page, 1), per_page: 2)
 
     respond_to do |f|
       f.html

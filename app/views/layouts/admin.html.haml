@@ -19,6 +19,11 @@
           %ul.nav.navbar-nav
             %li
               %a{href: '/admin/galleries'}= Gallery.model_name.human(count: 0.1).mb_chars.capitalize
+          %ul.pull-right.nav.navbar-nav{aria: {labelledby: 'dLabel'}}
+            %li
+              = link_to destroy_user_session_path, data: {method: :delete} do
+                %i.glyphicon.glyphicon-off
+                = t('logout')
         / /.navbar-collapse
     .container
       = yield

@@ -38,6 +38,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bootstrap-sass'
 
 gem 'devise'
+gem 'devise-bootstrap-views'
+
+gem 'will_paginate'
 
 group :development, :test do
   gem 'pry'

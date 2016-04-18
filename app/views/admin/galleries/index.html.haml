@@ -9,6 +9,10 @@
 
 .entries-list
   - @entries.each do |gallery|
-    .list-item
-      = link_to gallery.title, [:edit, :admin, gallery]
-      %input.form-control{type: :text, value: polymorphic_url(gallery)}
+    .list-item.form-group
+      .title-container
+        = link_to gallery.title, [:edit, :admin, gallery]
+      .link-container
+        %input.form-control{type: :text, value: polymorphic_url(gallery)}
+
+= will_paginate @entries

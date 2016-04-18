@@ -54,6 +54,10 @@ body {
         margin-right: 0;
       }
     }
+
+    .title-container {
+      width: 250px;
+    }
   }
 }
 
@@ -69,5 +73,19 @@ body {
         margin-right: 0;
       }
     }
+  }
+}
+
+.pagination {
+  display: block;
+  margin: 40px auto 0;
+  text-align: center;
+  font-size: 16px;
+  > * {
+    border: 1px solid #ededed;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 10px;
   }
 }
