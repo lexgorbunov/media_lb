@@ -14,6 +14,7 @@ ru:
       link:                       Ссылка
     photo:
       image:                      Картинка
+      link:                       Ссылка
   helpers:
     label:
       <<: *shared_attributes
@@ -32,6 +33,8 @@ ru:
           attributes:
             image:
               blank:                обязательно должна быть загружена
+            link:
+              invalid:              имеет неверный формат
     models:
       gallery:
         one:        коллекция

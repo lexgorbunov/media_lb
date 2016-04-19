@@ -13,5 +13,5 @@ class Photo < ActiveRecord::Base
   ]
 
   validates :image, presence: true
-  validates :link, format: { with: URI.regexp }
+  validates :link, format: { with: URI.regexp }, allow_blank: true
 end

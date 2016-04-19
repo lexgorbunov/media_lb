@@ -8,8 +8,11 @@ class Gallery < ActiveRecord::Base
     photos_attributes: Photo::PARAMS + [:_destroy],
   ]
 
+  belongs_to :user
+
   scope :published, -> (flag = true) { where(is_published: flag) }
 
   validates :title, presence: true
+  validates :user, presence: true
 
 end

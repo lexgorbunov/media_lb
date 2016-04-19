@@ -4,7 +4,10 @@ class Admin::GalleriesController < Admin::AdminController
   permit gallery: Gallery::PARAMS
 
   def index
-    @entries = Gallery.paginate(page: params.fetch(:page, 1), per_page: 2)
+    @entries =
+      Gallery
+        .where(user: current_user)
+        .paginate(page: params.fetch(:page, 1), per_page: 2)
 
     respond_to do |f|
       f.html
@@ -12,7 +15,7 @@ class Admin::GalleriesController < Admin::AdminController
   end
 
   def edit
-    @entry = Gallery.find(params[:id])
+    @entry = Gallery.where(user: current_user).find(params[:id])
 
     respond_to do |f|
       f.html
@@ -20,7 +23,7 @@ class Admin::GalleriesController < Admin::AdminController
   end
 
   def new
-    @entry = Gallery.new
+    @entry = Gallery.new(user_id: current_user.id)
 
     respond_to do |f|
       f.html do
@@ -30,7 +33,7 @@ class Admin::GalleriesController < Admin::AdminController
   end
 
   def create
-    @entry = Gallery.new(permitted_params(:gallery))
+    @entry = Gallery.new(permitted_params(:gallery).merge(user_id: current_user.id))
 
     respond_to do |f|
       f.html do
@@ -46,7 +49,7 @@ class Admin::GalleriesController < Admin::AdminController
   end
 
   def update
-    @entry = Gallery.find(params[:id])
+    @entry = Gallery.where(user: current_user).find(params[:id])
     respond_to do |f|
       f.html do
         if @entry.update_attributes(permitted_params(:gallery))
@@ -61,7 +64,7 @@ class Admin::GalleriesController < Admin::AdminController
   end
 
   def destroy
-    @entry = Gallery.find(params[:id])
+    @entry = Gallery.where(user: current_user).find(params[:id])
 
     respond_to do |f|
       f.html do

@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160418215502) do
+ActiveRecord::Schema.define(version: 20160419185110) do
 
   create_table "galleries", force: :cascade do |t|
     t.string   "title"
     t.boolean  "is_published", default: false, null: false
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.integer  "user_id"
   end
 
   create_table "media_files", force: :cascade do |t|
